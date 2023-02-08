@@ -1,0 +1,53 @@
+.todo {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border: 1px solid gray;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    align-self: flex-start;
+    border: 3px solid grey;
+
+    .controlPanel {
+        display: flex;
+        justify-content: end;
+
+        .date {
+            align-self: flex-end;
+            margin-left: 10px;
+        }
+        .icons {
+            margin-bottom: -4px;
+        }
+    }
+
+    .title {
+        font-size: 25px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .note {
+        word-wrap: break-word;
+        margin-bottom: 15px;
+    }
+
+    .edit_todo {
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding: 5px 15px;
+    }
+}
+
+.checked {
+    background-color: greenyellow;
+    color: black;
+}
+.warning {
+    border: 3px solid red;
+}
+.important {
+    border: 3px solid blue;
+}

@@ -1,0 +1,27 @@
+.input_todo_block {
+    width: 600px;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .input_todo {
+        width: 100%;
+        border-bottom: 1px solid grey;
+        font-size: 18px;
+        padding: 5px;
+        margin-bottom: 15px;
+    }
+    .textarea_todo {
+        width: 100%;
+        box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.3);     
+        font-size: 18px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .save {
+        display: flex;
+        justify-content: right;
+    }
+    margin-bottom: 50px;
+}
