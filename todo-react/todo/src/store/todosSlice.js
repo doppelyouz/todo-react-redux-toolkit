@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+
+const localData = JSON.parse(localStorage.getItem("Todos") || "[]");
+
 export const todosSlice = createSlice({
   name: 'todos',
-  initialState: [],
+  initialState: localData,
   reducers: {
     addTodo: (state, action)=>{
         const newTodo = {
@@ -13,12 +16,15 @@ export const todosSlice = createSlice({
             type: action.payload.type
         }
         state.push(newTodo);
+        localStorage.setItem("Todos", JSON.stringify(state));
     },
     deleteTodo: (state, action) => {
-        return state.filter((todo) => todo.id !== action.payload);
+        const newTodos = state.filter((todo) => todo.id !== action.payload);
+        localStorage.setItem("Todos", JSON.stringify(newTodos));
+        return newTodos;
     },
     checkTodo: (state, action) => {
-        return state.map((todo) => {
+        const newTodos = state.map((todo) => {
            if(todo.id === action.payload) {
             return {
                 ...todo,
@@ -27,18 +33,22 @@ export const todosSlice = createSlice({
            }
            return todo;
         });
+        localStorage.setItem("Todos", JSON.stringify(newTodos));
+        return newTodos;
     },
     editTodo: (state, action) => {
-        return state.map((todo) => {
+        const newTodos = state.map((todo) => {
            if(todo.id === action.payload.id) {
             return {
                 ...todo,
                 title: action.payload.title,
                 description: action.payload.description
-            };
+            }
            }
            return todo;
         });
+        localStorage.setItem("Todos", JSON.stringify(newTodos));
+        return newTodos;
     }
   }
 })
