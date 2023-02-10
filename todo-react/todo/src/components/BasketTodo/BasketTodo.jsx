@@ -3,17 +3,21 @@ import React, { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
-import "./todo.scss";
 import { useDispatch } from "react-redux";
 
-const Todo = ({
+import './BasketTodo.scss'
+
+const BasketTodo = ({
+  todo,
   title,
   description,
   date,
   checkTodo,
-  deleteTodoToBasket,
+  deleteTodoFromBasket,
   editTodo,
+  returnTodo,
   id,
   type,
   checked,
@@ -37,19 +41,24 @@ const Todo = ({
   }
 
   const dispatchDeleting = () => {
-    dispatch(deleteTodoToBasket(id));
-  }
+    dispatch(deleteTodoFromBasket(id));
+  };
 
   const dispatchChecking = () => {
     dispatch(checkTodo(id));
-  }
+  };
 
   const dispatchEditing = (title, description) => {
-      dispatch(editTodo({id, title, description}));
-      setEditing(editing => !editing)
-  }
+    dispatch(editTodo({ id, title, description }));
+    setEditing((editing) => !editing);
+  };
+  
+  const dispatchReturning = () => {
+    dispatch(returnTodo(todo));
+  };
+
   const typeChecker = () => {
-    switch(type) {
+    switch (type) {
       case "default":
         break;
       case "important":
@@ -61,8 +70,8 @@ const Todo = ({
       default:
         break;
     }
-  }
-  
+  };
+
   typeChecker();
 
   return (
@@ -96,13 +105,19 @@ const Todo = ({
           <div className="title">{title}</div>
           <div className="note">{description}</div>
           <div className="controlPanel">
+          <button onClick={dispatchReturning}>
+              <KeyboardReturnIcon
+                className="icons"
+                style={checked ? { backgroundColor: "greenyellow" } : null}
+              />
+            </button>
             <button onClick={() => dispatchEditing(title, description)}>
               <EditIcon
                 className="icons"
                 style={checked ? { backgroundColor: "greenyellow" } : null}
               />
             </button>
-             <button onClick={dispatchDeleting}>
+            <button onClick={dispatchDeleting}>
               <DeleteIcon
                 className="icons"
                 style={checked ? { backgroundColor: "greenyellow" } : null}
@@ -121,5 +136,4 @@ const Todo = ({
     </div>
   );
 };
-
-export default Todo;
+export default BasketTodo;

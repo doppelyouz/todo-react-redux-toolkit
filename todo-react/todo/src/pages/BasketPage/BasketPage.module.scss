@@ -1,0 +1,19 @@
+.basket {
+    max-width: 1240px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    .basket__title {
+        text-align: center;
+        font-size: 120px;
+        font-weight: 800;
+        color: LightSlateGray;
+        margin-bottom: 25px;
+    }
+    .basket__todos {
+        width: 100%;
+    }
+}

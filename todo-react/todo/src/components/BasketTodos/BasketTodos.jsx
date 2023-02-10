@@ -1,14 +1,15 @@
 import React from 'react'
-import Todo from '../Todo/Todo';
+import BasketTodo from '../BasketTodo/BasketTodo';
 
-import './todos.scss'
+import './BasketTodos.scss';
 
-const Todos = ({todos, deleteTodoToBasket, checkTodo, editTodo}) => {
+const BasketTodos = ({todos, deleteTodoFromBasket, checkTodo, editTodo, returnTodo}) => {
   return (
-    <div className='todos'>
+    <div className="todos">
         {
           todos.map((todo) => {
-              return <Todo 
+              return <BasketTodo 
+              todo={todo}
               key={todo.id} 
               title={todo.title} 
               description={todo.description} 
@@ -16,8 +17,9 @@ const Todos = ({todos, deleteTodoToBasket, checkTodo, editTodo}) => {
               date={todo.date} 
               type={todo.type} 
               checkTodo={checkTodo} 
-              deleteTodoToBasket={deleteTodoToBasket} 
+              deleteTodoFromBasket={deleteTodoFromBasket} 
               editTodo={editTodo}
+              returnTodo={returnTodo}
               id={todo.id} 
             />
           })
@@ -26,4 +28,4 @@ const Todos = ({todos, deleteTodoToBasket, checkTodo, editTodo}) => {
   )
 }
 
-export default Todos;
+export default BasketTodos;
