@@ -1,16 +1,15 @@
-import { Header, WorkSpace } from "./components";
 import './styles/main.scss'
 import { SnackbarProvider } from "notistack";
 import { store } from './store'
 import { Provider } from 'react-redux'
+
+import Router from './Router';
+
 function App() {
   return (
     <SnackbarProvider maxSnack={3}>
       <Provider store={store}>
-        <div className="App">
-          <Header />
-          <WorkSpace /> 
-        </div>
+        <Router />
       </Provider>
     </SnackbarProvider>
   );
