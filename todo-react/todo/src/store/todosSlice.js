@@ -47,54 +47,47 @@ export const todosSlice = createSlice({
         localStorage.setItem("BasketTodos", JSON.stringify(newBasketTodos));
     },
     checkTodo: (state, action) => {
-        const newTodos = state.todos.map((todo) => {
-           if(todo.id === action.payload) {
-            return {
-                ...todo,
-                checked: !todo.checked
-            };
-           }
-           return todo;
-        });
-        const newBasketTodos = state.basketTodos.map((todo) => {
-           if(todo.id === action.payload) {
-            return {
-                ...todo,
-                checked: !todo.checked
-            };
-           }
-           return todo;
-        });
-        state.todos = newTodos;
-        state.basketTodos = newBasketTodos;
-        localStorage.setItem("Todos", JSON.stringify(newTodos));
-        localStorage.setItem("BasketTodos", JSON.stringify(newBasketTodos));
+        const createNewTodos = (todosArray, localName) => {
+            const newTodos = todosArray.map((todo) => {
+                if(todo.id === action.payload) {
+                 return {
+                     ...todo,
+                     checked: !todo.checked
+                 };
+                }
+                return todo;
+             });
+             if(localName === "Todos") {
+                state.todos = newTodos;
+             } else if (localName === "BasketTodos") {
+                state.basketTodos = newTodos;
+             };
+             localStorage.setItem(localName, JSON.stringify(newTodos));
+        };
+        createNewTodos(state.todos, "Todos");
+        createNewTodos(state.basketTodos, "BasketTodos");
     },
     editTodo: (state, action) => {
-        const newTodos = state.todos.map((todo) => {
-           if(todo.id === action.payload.id) {
-            return {
-                ...todo,
-                title: action.payload.title,
-                description: action.payload.description
-            }
-           }
-           return todo;
-        });
-        const newBasketTodos = state.basketTodos.map((todo) => {
-            if(todo.id === action.payload.id) {
-             return {
-                 ...todo,
-                 title: action.payload.title,
-                 description: action.payload.description
-             }
-            }
-            return todo;
-        });
-        state.todos = newTodos;
-        state.basketTodos = newBasketTodos;
-        localStorage.setItem("BasketTodos", JSON.stringify(newBasketTodos));
-        localStorage.setItem("Todos", JSON.stringify(newTodos));
+        const createNewTodos = (todosArray, localName) => {
+            const newTodos = todosArray.map((todo) => {
+                if(todo.id === action.payload.id) {
+                 return {
+                     ...todo,
+                     title: action.payload.title,
+                     description: action.payload.description
+                 }
+                }
+                return todo;
+             });
+             if(localName === "Todos") {
+                state.todos = newTodos;
+             } else if (localName === "BasketTodos") {
+                state.basketTodos = newTodos;
+             };
+             localStorage.setItem(localName, JSON.stringify(newTodos));
+        };
+        createNewTodos(state.todos, "Todos");
+        createNewTodos(state.basketTodos, "BasketTodos");
     }
   }
 })
